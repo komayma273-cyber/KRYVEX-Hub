@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>😂 Meme Soundboard</title>
+<style>
+body{margin:0;background:#111;color:#fff;font-family:sans-serif;text-align:center}
+h1{font-size:40px}
+.board{display:flex;flex-wrap:wrap;justify-content:center;gap:15px;padding:20px}
+button{width:150px;height:100px;border:0;border-radius:25px;font-size:20px;background:#ff9800;color:#fff;cursor:pointer}
+button:active{transform:scale(.9)}
+.red{background:#f44336}.purple{background:#9c27b0}
+.panel{background:#222;padding:15px;border-radius:20px;margin:20px}
+</style>
+</head>
+<body>
+<h1>😂 MEME SOUNDBOARD</h1>
+
+<div class="board">
+<button onclick="playSound('nick1')">🙋🏿‍♂️💀<br>Nick hunt x2</button>
+<button onclick="playSound('nick2')">💀<br>Nick hurt</button>
+<button onclick="playSound('lab')">🍛<br>เล่นได้ลาบมาก</button>
+<button onclick="playSound('ruler')">📏<br>📏</button>
+<button class="purple" onclick="randomSound()">🎲<br>สุ่มมีม</button>
+<button class="purple" onclick="playAll()">🔥<br>รวมเสียง</button>
+<button class="red" onclick="stopAll()">⏹️<br>หยุดเสียง</button>
+</div>
+
+<div class="panel">
+<p>🔊 ระดับเสียง</p>
+<input type="range" min="0" max="1" step="0.1" value="1" oninput="setVolume(this.value)">
+<p>⚡ ความเร็ว</p>
+<select onchange="setSpeed(this.value)">
+<option value="0.5">0.5x</option>
+<option value="1" selected>1x</option>
+<option value="1.5">1.5x</option>
+<option value="2">2x</option>
+</select>
+</div>
+
+<audio id="nick1" src="https://cdn.discordapp.com/attachments/1525843027736924264/1525865095177961472/1000015708.mp3?ex=6a54f01b&is=6a539e9b&hm=2644394d3c3732872be3ec34cd980a44b9ede9cf2777adabad35489cd43b8e5b"></audio>
+<audio id="nick2" src="https://cdn.discordapp.com/attachments/1525843027736924264/1525876018592616528/1000015712.mp3?ex=6a54fa48&is=6a53a8c8&hm=efbc63473145a580bbafe3f12a446fb29593e399ea9ae35d791e7837b80b2faf"></audio>
+<audio id="lab" src="https://cdn.discordapp.com/attachments/1525843027736924264/1525881638972821624/1000015714.mp3?ex=6a54ff84&is=6a53ae04&hm=c0705a2b552618a588b9c6fad39308caf5975f8a1dc52c5f58cb8a8f929e4c14"></audio>
+<audio id="ruler" src="https://cdn.discordapp.com/attachments/1525843027736924264/1526187176822309025/4bcf02113de179bca071089354081762.mp3?ex=6a561c12&is=6a54ca92&hm=ad3dc119f2afaca729748aacdd76848b21d0a503496561884dc2eca36facb4c5"></audio>
+
+<script>
+let sounds=["nick1","nick2","lab","ruler"];
+let speed=1;
+function playSound(id){let a=document.getElementById(id);a.pause();a.currentTime=0;a.playbackRate=speed;a.play();}
+function stopAll(){document.querySelectorAll("audio").forEach(a=>{a.pause();a.currentTime=0;});}
+function playAll(){document.querySelectorAll("audio").forEach(a=>{a.pause();a.currentTime=0;a.playbackRate=speed;a.play();});}
+function randomSound(){playSound(sounds[Math.floor(Math.random()*sounds.length)]);}
+function setVolume(v){document.querySelectorAll("audio").forEach(a=>a.volume=v);}
+function setSpeed(v){speed=Number(v);}
+</script>
+</body>
+</html>
